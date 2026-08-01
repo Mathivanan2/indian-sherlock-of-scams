@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[CASE TITLE] | Indian Sherlock of Scams</title>
+<link rel="icon" href="../assets/logo-icon.svg" type="image/svg+xml">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Nunito+Sans:wght@400;600;800&display=swap');
+
+  :root{
+    --ink: #23303D;
+    --ink-soft: #4B5B68;
+    --parchment: #F6F1E4;
+    --parchment-2: #EFE7D3;
+    --gold: #B4863A;
+    --gold-dark: #7A5A24;
+    --redact: #23303D;
+    --line: #D9CEB2;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:'Nunito Sans', sans-serif;
+    line-height:1.7;
+  }
+
+  .bg-motif{
+    position:fixed;
+    opacity:0.08;
+    color:var(--ink);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .note{
+    position:fixed;
+    top:-60px;
+    font-size:26px;
+    opacity:0.16;
+    color:var(--gold-dark);
+    pointer-events:none;
+    z-index:0;
+    animation-name:drift;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+  }
+
+  @keyframes drift{
+    0%{ transform:translateY(-10vh) translateX(0) rotate(0deg); }
+    50%{ transform:translateY(50vh) translateX(30px) rotate(180deg); }
+    100%{ transform:translateY(110vh) translateX(-20px) rotate(360deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .note{ animation:none; opacity:0.05; }
+  }
+
+  header{
+    position:relative;
+    z-index:5;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 6vw;
+    border-bottom:1px solid var(--line);
+    background:var(--parchment);
+  }
+
+  #post-nav a{ color:var(--ink-soft); text-decoration:none; margin-left:26px; font-size:14px; font-weight:700; }
+
+  @media (max-width:640px){
+    #post-nav{
+      position:fixed; top:0; right:-260px; width:240px; height:100vh;
+      background:var(--parchment-2); flex-direction:column; padding:80px 24px;
+      transition:right 0.25s ease; z-index:10; display:flex;
+    }
+    #post-nav.open{ right:0; }
+    #post-nav a{ display:block; margin:0 0 20px; font-size:16px; }
+    .nav-toggle-btn{ display:block !important; }
+  }
+
+  .brand{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .brand .glass{
+    width:26px; height:26px;
+    border-radius:50%;
+    border:2px solid var(--gold-dark);
+    position:relative;
+  }
+  .brand .glass::after{
+    content:'';
+    position:absolute;
+    width:10px; height:2px;
+    background:var(--gold-dark);
+    bottom:-6px; right:-6px;
+    transform:rotate(45deg);
+  }
+
+  nav a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    margin-left:28px;
+    font-size:14px;
+    font-weight:600;
+  }
+
+  main{
+    max-width:680px;
+    margin:0 auto;
+    padding:60px 6vw 100px;
+    position:relative;
+    z-index:2;
+  }
+
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--parchment-2);
+    border:1px solid var(--line);
+    color:var(--gold-dark);
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:0.06em;
+    padding:6px 14px;
+    border-radius:999px;
+    margin-bottom:20px;
+  }
+  .badge::before{ content:'●'; color:#8B2E2E; font-size:10px; }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-size:38px;
+    font-weight:700;
+    line-height:1.2;
+    margin:0 0 14px;
+    border-right:2px solid transparent;
+  }
+  h1.typing{
+    white-space:normal;
+    overflow:hidden;
+    border-right:2px solid var(--gold-dark);
+  }
+
+  .byline{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-bottom:36px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  p{ margin:0 0 20px; font-size:16.5px; }
+
+  .redact{
+    background:var(--redact);
+    color:var(--redact);
+    border-radius:3px;
+    cursor:pointer;
+    transition:background 0.25s ease, color 0.25s ease;
+    padding:0 3px;
+  }
+  .redact:hover, .redact.revealed{
+    background:var(--parchment-2);
+    color:var(--ink);
+  }
+  .redact-hint{
+    font-size:12px;
+    color:var(--ink-soft);
+    font-style:italic;
+    margin:-10px 0 24px;
+  }
+
+  blockquote{
+    margin:32px 0;
+    padding:18px 22px;
+    background:var(--parchment-2);
+    border-left:3px solid var(--gold-dark);
+    border-radius:0;
+  }
+  blockquote .exhibit{
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:0.08em;
+    color:var(--gold-dark);
+    display:block;
+    margin-bottom:8px;
+  }
+  blockquote p{ margin:0; font-family:'Fraunces', serif; font-style:italic; font-size:18px; }
+
+  h2{
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    font-weight:600;
+    margin:44px 0 16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  h2::before{
+    content:'';
+    width:8px; height:8px;
+    background:var(--gold-dark);
+    border-radius:50%;
+    display:inline-block;
+  }
+
+  .progress-dots{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    margin:50px 0 10px;
+  }
+  .progress-dots span{
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--line);
+  }
+  .progress-dots span.active{ background:var(--gold-dark); }
+
+  .verdict{
+    margin-top:56px;
+    padding:28px;
+    background:var(--parchment-2);
+    border:1px solid var(--line);
+    border-radius:10px;
+  }
+  .verdict p.prompt{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:17px;
+    margin-bottom:20px;
+  }
+  .choices{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .choices button{
+    flex:1;
+    min-width:180px;
+    padding:14px 16px;
+    background:var(--parchment);
+    border:1px solid var(--ink);
+    border-radius:6px;
+    font-family:'Nunito Sans', sans-serif;
+    font-weight:800;
+    font-size:14px;
+    cursor:pointer;
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  .choices button:hover{ background:var(--ink); color:var(--parchment); }
+  .choices button:active{ transform:scale(0.98); }
+
+  .result{
+    margin-top:16px;
+    font-size:14px;
+    color:var(--ink-soft);
+    display:none;
+  }
+  .result.show{ display:block; }
+
+  footer{
+    text-align:center;
+    padding:30px;
+    font-size:12px;
+    color:var(--ink-soft);
+    position:relative;
+    z-index:2;
+  }
+
+  @media (max-width:600px){
+    h1{ font-size:28px; }
+  }
+</style>
+</head>
+<body>
+
+<i class="bg-motif" style="top:120px; left:4vw; font-size:60px; transform:rotate(-12deg);">&#128064;</i>
+
+<span class="note" style="left:8vw; animation-duration:22s; animation-delay:0s;">&#8377;</span>
+<span class="note" style="left:22vw; animation-duration:28s; animation-delay:4s; font-size:22px;">&#36;</span>
+<span class="note" style="left:40vw; animation-duration:19s; animation-delay:2s; font-size:30px;">&#8377;</span>
+<span class="note" style="left:60vw; animation-duration:25s; animation-delay:6s;">&#163;</span>
+<span class="note" style="left:78vw; animation-duration:21s; animation-delay:1s; font-size:24px;">&#8377;</span>
+<span class="note" style="left:90vw; animation-duration:30s; animation-delay:8s; font-size:20px;">&#36;</span>
+
+<header class="site-header" style="border-bottom:1px solid var(--line);">
+  <a class="brand" href="../index.html" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); font-family:'Fraunces',serif; font-weight:600; font-size:18px;"><img src="../assets/logo-icon.svg" alt="" style="width:34px;height:34px;border-radius:8px;">Indian Sherlock of Scams</a>
+  <button class="nav-toggle-btn" aria-label="Toggle menu" onclick="document.getElementById('post-nav').classList.toggle('open')" style="display:none; background:none; border:none; font-size:22px; cursor:pointer; color:var(--ink);">&#9776;</button>
+  <nav id="post-nav">
+    <a href="../stories.html">Stories</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <div class="badge">CASE #[NUMBER] — [OPEN / SOLVED]</div>
+  <h1 id="headline" class="typing">[Your case title here]</h1>
+  <div class="byline">
+    <span>Filed by the desk</span>
+    <span>·</span>
+    <span>[X] min read</span>
+    <span>·</span>
+    <span>Category: [e.g. UPI Fraud, AI Scams, Banking Fraud]</span>
+  </div>
+
+  <p>[Opening hook — one or two sentences that pull the reader into the case.]</p>
+
+  <p>[Set up the scam or pattern. Use <span class="redact">a redacted phrase</span> like this for a playful reveal-on-tap moment — wrap any span in class="redact".]</p>
+
+  <p class="redact-hint">Tap the redacted phrases above to reveal them.</p>
+
+  <h2>The setup</h2>
+  <p>[Explain how the scam worked, step by step.]</p>
+
+  <blockquote>
+    <span class="exhibit">Exhibit A</span>
+    <p>[A short, punchy insight or quote-style takeaway — one sentence works best here.]</p>
+  </blockquote>
+
+  <h2>The twist</h2>
+  <p>[The unexpected turn — a related variant, a detail that surprised you, or a bigger pattern this fits into.]</p>
+
+  <h2>The resolution</h2>
+  <p>[The takeaway — what readers should actually do or watch for.]</p>
+
+  <div class="progress-dots">
+    <span class="active"></span><span class="active"></span><span class="active"></span><span></span>
+  </div>
+
+  <div class="verdict">
+    <p class="prompt">[Your "reader as detective" prompt — pose a choice related to the case.]</p>
+    <div class="choices">
+      <button onclick="showResult(0)">[Choice one]</button>
+      <button onclick="showResult(1)">[Choice two]</button>
+    </div>
+    <div class="result" id="result">
+      <p id="result-text"></p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div style="max-width:520px; margin:0 auto; border-top:1px solid var(--line); padding-top:16px;">
+    <strong style="display:block; margin-bottom:6px; color:var(--ink-soft);">Disclaimer</strong>
+    This blog is for educational and awareness purposes only. Case files are illustrative, based on publicly reported scam patterns, and are not financial, legal, or investigative advice. Always verify anything unusual directly with your bank or a qualified professional.
+    <div style="margin-top:16px;">
+      <a href="../index.html" style="color:var(--ink-soft); text-decoration:none; font-weight:700; margin:0 8px;">Home</a>
+      <a href="../stories.html" style="color:var(--ink-soft); text-decoration:none; font-weight:700; margin:0 8px;">More case files</a>
+      <a href="../contact.html" style="color:var(--ink-soft); text-decoration:none; font-weight:700; margin:0 8px;">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const results = [
+    "[Response to choice one — a short payoff line.]",
+    "[Response to choice two — a short payoff line.]"
+  ];
+  function showResult(i){
+    document.getElementById('result-text').textContent = results[i];
+    document.getElementById('result').classList.add('show');
+  }
+
+  document.querySelectorAll('.redact').forEach(function(el){
+    el.addEventListener('click', function(){ el.classList.toggle('revealed'); });
+  });
+
+  const headline = document.getElementById('headline');
+  const fullText = headline.textContent;
+  headline.textContent = '';
+  let i = 0;
+  function type(){
+    if(i <= fullText.length){
+      headline.textContent = fullText.slice(0, i);
+      i++;
+      setTimeout(type, 45);
+    } else {
+      headline.style.borderRight = 'none';
+    }
+  }
+  type();
+</script>
+
+</body>
+</html>
