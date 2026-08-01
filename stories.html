@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stories — Indian Sherlock of Scams</title>
+<meta name="description" content="Every case file on Indian Sherlock of Scams, organized by category.">
+<link rel="icon" href="assets/logo-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Nunito+Sans:wght@400;600;800&display=swap');
+
+  main{ max-width:900px; margin:0 auto; padding:50px 6vw 90px; position:relative; z-index:2; }
+  h1{ font-size:30px; margin:0 0 8px; }
+  .sub{ color:var(--ink-soft); margin:0 0 30px; font-size:15px; }
+
+  .filters{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
+  .filter-btn{
+    padding:8px 16px; border-radius:999px; border:1px solid var(--line);
+    background:var(--parchment-2); font-size:13px; font-weight:700;
+    color:var(--ink-soft); cursor:pointer;
+  }
+  .filter-btn.active{ background:var(--ink); color:var(--parchment); border-color:var(--ink); }
+
+  .board{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+    gap:18px;
+  }
+  .pin{
+    background:var(--parchment-2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px;
+    text-decoration:none;
+    color:var(--ink);
+    display:block;
+    position:relative;
+    transition:transform 0.15s ease, border-color 0.15s ease;
+  }
+  .pin:hover{ transform:translateY(-3px) rotate(-0.5deg); border-color:var(--gold-dark); }
+  .pin::before{
+    content:'';
+    position:absolute; top:-6px; left:20px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--stamp-red);
+  }
+  .pin .badge{ margin-bottom:14px; }
+  .pin h3{ font-size:16px; margin:0 0 8px; }
+  .pin p{ font-size:13px; color:var(--ink-soft); margin:0 0 12px; }
+  .pin .tag{ font-size:11px; color:var(--gold-dark); font-weight:800; letter-spacing:0.04em; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="index.html"><img src="assets/logo-icon.svg" alt="">Indian Sherlock of Scams</a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.site-nav').classList.toggle('open')">&#9776;</button>
+  <nav class="site-nav">
+    <a href="stories.html" class="active">Stories</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <h1>The case files</h1>
+  <p class="sub">Every investigation so far, filed by category.</p>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All cases</button>
+    <button class="filter-btn" data-filter="banking">Banking fraud</button>
+    <button class="filter-btn" data-filter="ai">AI scams</button>
+    <button class="filter-btn" data-filter="upi">UPI &amp; payments</button>
+  </div>
+
+  <div class="board" id="board">
+    <a class="pin" href="posts/case-file-01.html" data-cat="banking">
+      <span class="badge open">CASE #001 &middot; OPEN</span>
+      <h3>The bank that never called</h3>
+      <p>An SMS about expiring reward points, a convincing fake login page, and the pattern behind bank-impersonation scams.</p>
+      <span class="tag">BANKING FRAUD</span>
+    </a>
+    <a class="pin" href="#" data-cat="ai">
+      <span class="badge solved">CASE #002 &middot; COMING SOON</span>
+      <h3>The deepfake that almost worked</h3>
+      <p>An AI-generated voice, a wire transfer request, and the seconds that separated the fraud from the payout.</p>
+      <span class="tag">AI SCAMS</span>
+    </a>
+    <a class="pin" href="#" data-cat="ai">
+      <span class="badge solved">CASE #003 &middot; COMING SOON</span>
+      <h3>How AI catches money launderers</h3>
+      <p>A look at the other side &mdash; how machine learning flags the transactions humans miss.</p>
+      <span class="tag">AI &amp; COMPLIANCE</span>
+    </a>
+    <a class="pin" href="#" data-cat="upi">
+      <span class="badge solved">CASE #004 &middot; COMING SOON</span>
+      <h3>The fake loan app that drained accounts</h3>
+      <p>How a permissions screen became the crime scene.</p>
+      <span class="tag">UPI &amp; PAYMENTS</span>
+    </a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p class="disclaimer">This blog is for educational and awareness purposes only. Case files are illustrative, based on publicly reported scam patterns, and are not financial, legal, or investigative advice.</p>
+  <div class="foot-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const pins = document.querySelectorAll('.pin');
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      pins.forEach(function(pin){
+        pin.style.display = (filter === 'all' || pin.dataset.cat === filter) ? 'block' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
